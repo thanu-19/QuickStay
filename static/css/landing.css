@@ -1,0 +1,122 @@
+/* ---------- Global Styles ---------- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* header {
+    background-color: #e04b50;
+    color: #fff;
+    text-align: center;
+    padding: 25px 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    letter-spacing: 1px;
+} */
+
+/* ---------- Main Section ---------- */
+main {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+main h1 {
+    font-size: 2.5em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+main p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* ---------- Room Cards Section ---------- */
+.room-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.room-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.room-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.room-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #e04b50;
+}
+
+/* ---------- Room Info ---------- */
+.room-info {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.room-info h3 {
+    color: #e04b50;
+    margin-bottom: 8px;
+    font-size: 1.4em;
+}
+
+.room-info p {
+    font-size: 1.05em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* ---------- Button ---------- */
+.book-btn {
+    display: inline-block;
+    background-color: #ff5a5f;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+    background-color: #e04b50;
+    box-shadow: 0 4px 10px rgba(224, 75, 80, 0.4);
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    .room-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .room-card {
+        width: 90%;
+    }
+
+    main h1 {
+        font-size: 2em;
+    }
+}

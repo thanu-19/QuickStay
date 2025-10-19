@@ -1,0 +1,72 @@
+/* --- Reset styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Container */
+.view-rooms-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.view-rooms-container h2 {
+    color: #ff5a5f;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Back button */
+.back-btn {
+    display: inline-block;
+    margin-bottom: 25px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff5a5f;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #e04e52;
+}
+
+/* Table styling */
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rooms-table th,
+.rooms-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.rooms-table th {
+    background-color: #ff5a5f;
+    color: #fff;
+    font-weight: 600;
+}
+
+.rooms-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.rooms-table tr:hover {
+    background-color: #ffe6e6;
+}

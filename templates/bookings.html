@@ -1,0 +1,62 @@
+{% extends 'mainbase.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+  <h2>My Bookings 🏨</h2>
+
+  {% if messages %}
+    <div class="messages">
+      {% for m in messages %}
+        <div class="msg {{ m.tags }}">{{ m }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="bookings-container">
+    {% if bookings %}
+      {% for booking in bookings %}
+        <div class="booking-card">
+          {% if booking.image_url %}
+            <img src="{{ booking.image_url }}"
+                 alt="{{ booking.room_name }}"
+                 class="booking-image"
+                 onerror="this.onerror=null;this.src='{% static 'images/default_hotel.jpg' %}';">
+          {% else %}
+            <img src="{% static 'images/default_hotel.jpg' %}"
+                 alt="{{ booking.room_name }}"
+                 class="booking-image">
+          {% endif %}
+
+          <div class="booking-info">
+            <h3>{{ booking.room_name }}</h3>
+            <p>📅 Check-in: <strong>{{ booking.checkin }}</strong> • Check-out: <strong>{{ booking.checkout }}</strong></p>
+            <p>👤 Persons: <strong>{{ booking.persons }}</strong> • 💰 Price: <strong>₹{{ booking.price }}</strong></p>
+
+            <div class="booking-actions">
+              {% if booking.paid %}
+                <span class="paid-badge">Paid ✅</span>
+              {% else %}
+                <form method="post" action="{% url 'pay_now' booking.id %}" style="display:inline">
+                  {% csrf_token %}
+                  <button type="submit" class="pay-btn">💳 Pay Now</button>
+                </form>
+              {% endif %}
+
+              <form method="post" action="{% url 'delete_booking' booking.id %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('Delete this booking?');">🗑️ Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-bookings-msg">You have no bookings yet.</p>
+    {% endif %}
+  </div>
+</main>
+
+<link rel="stylesheet" href="{% static 'css/bookings.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}

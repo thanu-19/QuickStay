@@ -1,0 +1,34 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/view_rooms.css' %}">
+
+<div class="view-rooms-container">
+    <h2>All Rooms</h2>
+    <a href="{% url 'dashboard' %}" class="back-btn">← Back to Dashboard</a>
+
+    <table class="rooms-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Room Name</th>
+                <th>Price (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ room.name }}</td>
+                <td>{{ room.price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align:center;">No rooms available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

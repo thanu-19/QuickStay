@@ -1,0 +1,82 @@
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<section class="signup-section">
+    <div class="signup-container">
+        <h2>Create Your Account</h2>
+        <form action="{% url 'signup' %}" method="post" class="signup-form">
+            {% csrf_token %}
+            <!-- Name -->
+            <div class="input-group">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="input-group">
+                <span class="icon"><i class="fa fa-envelope"></i></span>
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="input-group">
+                <span class="icon"><i class="fa fa-phone"></i></span>
+                <input type="text" name="phone" placeholder="Your Phone Number" required>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                <span class="icon"><i class="fa fa-lock"></i></span>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <span class="toggle" onclick="togglePassword()"><i class="fa fa-eye"></i></span>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="input-group">
+                <span class="icon"><i class="fa fa-lock"></i></span>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required>
+                <span class="toggle" onclick="toggleConfirmPassword()"><i class="fa fa-eye"></i></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Register</button>
+
+            <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+</section>
+
+<script>
+function togglePassword() {
+    const pass = document.getElementById('password');
+    const icon = pass.nextElementSibling.querySelector('i');
+    if(pass.type === 'password'){
+        pass.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        pass.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+function toggleConfirmPassword() {
+    const pass = document.getElementById('confirm_password');
+    const icon = pass.nextElementSibling.querySelector('i');
+    if(pass.type === 'password'){
+        pass.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        pass.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+{% endblock %}

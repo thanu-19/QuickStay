@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to QuickStay</h1>
+        <p>Book your perfect stay at the best hotels around the world.</p>
+        <a href="{% url 'signup' %}" class="btn">Get Started</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about">
+    <div class="container">
+        <h2>About QuickStay</h2>
+        <p>QuickStay is your reliable hotel booking system, offering a wide selection of hotels with verified reviews, competitive pricing, and 24/7 support. Enjoy seamless bookings and a professional experience.</p>
+        <img src="{% static 'images/team.jpg' %}" alt="Our Team">
+    </div>
+</section>
+
+<!-- Hotels Section -->
+<section class="hotels">
+    <div class="container">
+        <h2>Our Featured Hotels</h2>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="{% static 'images/hotel1.jpg' %}" alt="Hotel 1">
+                <h3>Hotel Luxe</h3>
+                <p>New York City, USA</p>
+                <a href="#" class="btn">Book Now</a>
+            </div>
+            <div class="hotel-card">
+                <img src="{% static 'images/hotel2.jpg' %}" alt="Hotel 2">
+                <h3>Sea View Resort</h3>
+                <p>Maldives</p>
+                <a href="#" class="btn">Book Now</a>
+            </div>
+            <div class="hotel-card">
+                <img src="{% static 'images/hotel3.jpg' %}" alt="Hotel 3">
+                <h3>Mountain Escape</h3>
+                <p>Swiss Alps</p>
+                <a href="#" class="btn">Book Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <div class="container">
+        <h2>GET IN TOUCH</h2>
+        <div class="contact-wrapper">
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <img src="{% static 'images/contact.jpg' %}" alt="Contact">
+                <p>Email: support@quickstay.com</p>
+                <p>Phone: +91 9885175403</p>
+                <p>Address: Nellore, Andhra Pradesh, India</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

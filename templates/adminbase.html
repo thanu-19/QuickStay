@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuickStay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+        <body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="{% url 'dashboard' %}" style="text-decoration: none; color: white;">
+                <i class="fa-solid fa-house"></i> QuickStay Dashboard
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="{% url 'login' %}">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 QuickStay. All rights reserved.</p>
+    </footer>
+    {% if debug %}
+<script src="http://127.0.0.1:35729/livereload.js"></script>
+{% endif %}
+
+</body>
+
+</html>

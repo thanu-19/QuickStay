@@ -1,0 +1,43 @@
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<section class="login-section">
+    <div class="container">
+        <div class="login-box">
+            <h2>Login to QuickStay</h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="input-group1">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group1">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" id="password" required>
+                    <i class="fa fa-eye toggle-password" onclick="togglePassword()"></i>
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
+        </div>
+    </div>
+</section>
+
+<script>
+function togglePassword() {
+    const pass = document.getElementById("password");
+    const icon = document.querySelector(".toggle-password");
+    if (pass.type === "password") {
+        pass.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        pass.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+</script>
+{% endblock %}

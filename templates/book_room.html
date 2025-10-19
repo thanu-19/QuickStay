@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Room | QuickStay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/book_room.css' %}">
+</head>
+<body>
+    <div class="book-container">
+        <!-- LEFT: Room Info -->
+        <div class="room-left">
+            <!-- Image is based on room_name -->
+            {% comment %} <img src="{% static 'images/' %}{{ request.GET.image }}" alt="{{ request.GET.name }}" class="room-image"> {% endcomment %}
+            {% comment %} <img src="{{ image_url }}" alt="{{ room_name }}" class="room-image">
+
+            <h2>{{ room_name }}</h2>
+            <p class="price">💰 Price: ₹{{ price }} / night</p> {% endcomment %}
+            <img src="{{ image_url }}" alt="{{ room_name }}" class="room-image">
+            <h2>{{ room_name }}</h2>
+            <p class="price">💰 Price: ₹{{ price }} / night</p>
+
+            <div class="features">
+                <div class="feature-item">⭐ 5-Star Experience</div>
+                <div class="feature-item">🛎️ 24/7 Room Service</div>
+                <div class="feature-item">🍽️ Food Delivery Available</div>
+                <div class="feature-item">🧹 Daily Cleaning</div>
+                <div class="feature-item">🚗 Free Parking</div>
+                <div class="feature-item">📶 High-Speed WiFi</div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Booking Form -->
+        <div class="room-right">
+            <h3>Book Your Stay 🏨</h3>
+
+            <!-- Toast container -->
+            <div class="toast-container" id="toastContainer"></div>
+
+            <form id="bookingForm" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="room_name" value="{{ room_name }}">
+                <input type="hidden" name="price" value="{{ price }}">
+
+                <label>Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label>Check-In Date:</label>
+                <input type="date" id="checkin" name="checkin" required>
+
+                <label>Check-Out Date:</label>
+                <input type="date" id="checkout" name="checkout" required>
+
+                <label>No. of Persons:</label>
+                <input type="number" id="persons" name="persons" min="1" max="10" required value="1">
+
+                <div class="buttons">
+                    <button type="button" class="check-btn" onclick="checkAvailability()">💗 Check Availability</button>
+                    <button type="submit" id="bookNow" class="book-btn" disabled>🛏️ Book Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+// Set today as min date
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('checkin').setAttribute('min', today);
+document.getElementById('checkout').setAttribute('min', today);
+
+// Ensure checkout ≥ checkin
+document.getElementById('checkin').addEventListener('change', function() {
+    const checkinDate = this.value;
+    document.getElementById('checkout').setAttribute('min', checkinDate);
+});
+
+// Frontend check availability
+function checkAvailability() {
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const persons = Number(document.getElementById('persons').value);
+    const email = document.getElementById('email').value.trim();
+    const bookNow = document.getElementById('bookNow');
+
+    if (!email || !checkin || !checkout || persons <= 0) {
+        showToast("Please fill all details to check availability.", "error");
+        bookNow.disabled = true;
+        return;
+    }
+
+    if (checkout <= checkin) {
+        showToast("Check-out must be after check-in.", "error");
+        bookNow.disabled = true;
+        return;
+    }
+
+    showToast("Dates look good! You can book now.", "success");
+    bookNow.disabled = false;
+}
+
+// Toast function
+function showToast(message, type='info', duration=3000, redirectUrl=null) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    let icon = '';
+    if(type === 'success') icon = '<i class="fa-solid fa-circle-check" style="color:green"></i>';
+    else if(type === 'error') icon = '<i class="fa-solid fa-circle-xmark" style="color:red"></i>';
+    else icon = '<i class="fa-solid fa-info-circle" style="color:blue"></i>';
+    toast.innerHTML = icon + message;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => container.removeChild(toast), 400);
+        if(redirectUrl) window.location.href = redirectUrl;
+    }, duration);
+}
+
+// Show Django messages as toast
+{% if messages %}
+    {% for m in messages %}
+        showToast("{{ m }}", "{{ m.tags }}");
+    {% endfor %}
+{% endif %}
+</script>
+</body>
+</html>

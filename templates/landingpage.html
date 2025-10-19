@@ -1,0 +1,27 @@
+{% extends 'mainbase.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+
+<main>
+    <h1>Find Your Room 🏨</h1>
+    <div class="room-container">
+        {% for room in rooms %}
+        <div class="room-card">
+            <img src="{{ room.image.url }}" alt="{{ room.name }}" class="room-img">
+            <div class="room-info">
+                <h3>{{ room.name }}</h3>
+                <p>💰 Price: ₹{{ room.price }} / night</p>
+                <!-- Pass room_id in URL -->
+                <a href="{% url 'book_room' %}?room_id={{ room.id }}" class="book-btn">
+                    🛏️ Book Now
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</main>
+
+{% endblock %}
